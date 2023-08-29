@@ -4,6 +4,7 @@ import "./database/connectdb.js";
 import authRouter from './routes/auth.route.js';
 import cookieParser from 'cookie-parser';
 import electoresRouter from './routes/electores.route.js';
+import conteoRouter from './routes/conteo.route.js';
 
 
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/electores',electoresRouter);
+app.use('/api/v1/conteo', conteoRouter);
 
 //arrancar servidor
 const PORT = process.env.PORT || 4000

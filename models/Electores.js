@@ -28,11 +28,21 @@ const electoresSchema = new mongoose.Schema({
         required: true,
         trim: true
      },
-     profesion:{
+     direccion:{
         type: String,
         required: false,
         trim: true
-     }
+     },
+      telefono:{
+      type: String,
+      required: false,
+      trim: true
+   },
+   grupo:{
+      type: Boolean,
+      required: false,
+      trim: true
+   }
 
 });
 export const Electores=  mongoose.model('electores', electoresSchema);

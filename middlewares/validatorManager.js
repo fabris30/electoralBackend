@@ -10,18 +10,23 @@ export const validationResultExpress = (req, res, next) => {
 
     next();
 };
+export const bodyElectoresValidator = [ 
+    body("cedula", "Cedula Incorrecta").trim().notEmpty(),
+
+     validationResultExpress
+  ];
 
 export const bodyLoginValidator = [ 
     body("username", "Usuario Incorrecto").trim(),
     body ("password", "Contraseña incorrecta").trim(),
 
      validationResultExpress
-  ]
+  ];
 
   export const bodyRegisterValidator = [ 
     body("username", "Usuario Incorrecto").trim(),
     body ("password", "Contraseña incorrecta").trim(),
 
      validationResultExpress
-  ]
+  ];
  
