@@ -91,18 +91,29 @@ export const buscarCedula = async (req, res) => {
 
   //buscar por varios parametros
 export const filtro = async (req, res) => {
-    const filtro = {
-        lugar: 'rada',      // Nombre del producto a buscar (opcional)
-        mesa: '4'   
-      };
-      Electores.find(filtro).toArray((err, electores) => {
-        if (err) {
-          console.error('Error al buscar productos:', err);
-          return;
-        }
     
-        res.json(electores);
+  const { grupo, lugar, mesa } = req.query;
     
-      });
+  try {
+    
+    let query = {};
+
+    if (grupo) {
+      query.grupo = grupo;
+    }
+
+    if (lugar) {
+      query.lugar = { $regex: lugar, $options: 'i' };
+    }
+
+    if (mesa) {
+      query.mesa = mesa;
+    }
+    const electores = await Electores.find(query);
+    res.json(electores);
+
+  } catch (error) {
+    res.status(500).json({ error: 'Error en el servidor' });
+  }
   };
 

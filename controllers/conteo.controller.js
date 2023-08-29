@@ -67,3 +67,30 @@ export const editarConteo = async (req, res) => {
     
      
 };
+ //buscar por varios parametros
+ export const filtroConeo = async (req, res) => {
+    
+  const { candidato, lugar, mesa } = req.query;
+    
+  try {
+    
+    let query = {};
+
+    if (candidato) {
+      query.candidato =  { $regex: candidato, $options: 'i' };
+    }
+
+    if (lugar) {
+      query.lugar = { $regex: lugar, $options: 'i' };
+    }
+
+    if (mesa) {
+      query.mesa = mesa;
+    }
+    const conteo = await Conteo.find(query);
+    res.json(conteo);
+
+  } catch (error) {
+    res.status(500).json({ error: 'Error en el servidor' });
+  }
+  };
