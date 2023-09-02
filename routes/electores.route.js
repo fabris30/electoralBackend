@@ -7,7 +7,7 @@ const router = Router();
 
 // get 
 
-router.get('/', requireToken, getElectores);
+router.get('/',requireToken, getElectores);
 router.post('/', requireToken, bodyElectoresValidator, createElectores);
 router.get('/buscarcc', requireToken, buscarCedula);
 router.delete('/eliminar', requireToken, removeElector);

@@ -2,7 +2,7 @@ import  jwt  from "jsonwebtoken"
 import { tokenVerificationErrors } from "../utils/tokenManager.js";
 export const requireToken =(req, res, next) => {
     try {
-        let token = req.headers?. authorization;
+        let token = req.headers?.authorization;
         console.log(token);
 
         if(!token)

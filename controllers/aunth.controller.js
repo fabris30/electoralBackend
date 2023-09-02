@@ -6,6 +6,7 @@ export const login= async (req, res) => {
          
   try {
     const {username, password} = req.body;
+    console.log(username, password)
     let user = await User.findOne({username});
     if(!user)
     return res.status(403).json({error: "no existe este usuario"});
@@ -18,7 +19,7 @@ export const login= async (req, res) => {
     const {token, expiresIn} = generateToken(user.id);
     generateRefreshToken(user.id, res);
     return res.json({token, expiresIn});
-
+   
   } catch (error) {
     console.log(error);
   }

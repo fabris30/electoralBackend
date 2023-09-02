@@ -19,11 +19,18 @@ export const createElectores = async  (req, res) => {
     const {cedula, nombres, apellidos, lugar, mesa, direccion, telefono, grupo} = req.body;
 
     try {
+      const elector = await Electores.findOne({ cedula: cedula });
 
-        const electores =new Electores({cedula, nombres, apellidos, lugar, mesa, direccion, telefono, grupo});
+      if(elector){
+        res.json({msg: "Ya esta cedula esta registrada"});
+      }else{
+         const electores =new Electores({cedula, nombres, apellidos, lugar, mesa, direccion, telefono, grupo});
         await electores.save()
 
          return res.json({msg: "Registro Exitoso"});
+      }
+    
+       
     } catch (error) {
         console.log(error);
         return res.status(500).json({error: 'error de servidor'});

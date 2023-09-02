@@ -7,7 +7,7 @@ import { requireRefreshToken } from "../middlewares/requireRefreshToken.js";
 import { bodyLoginValidator,bodyRegisterValidator } from "../middlewares/validatorManager.js";
 const router = Router();
 
-router.get('/login',bodyLoginValidator,login);
+router.post('/login',bodyLoginValidator,login);
 router.post('/registro', bodyRegisterValidator, registro);     
 router.get("/protected",requireToken ,infoUser);
 router.get("/refresh",requireRefreshToken,refreshToken);
