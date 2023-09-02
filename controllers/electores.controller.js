@@ -22,7 +22,7 @@ export const createElectores = async  (req, res) => {
       const elector = await Electores.findOne({ cedula: cedula });
 
       if(elector){
-        res.json({msg: "Ya esta cedula esta registrada"});
+        res.status(403).json({error: "Ya esta cedula esta registrada"});
       }else{
          const electores =new Electores({cedula, nombres, apellidos, lugar, mesa, direccion, telefono, grupo});
         await electores.save()
@@ -84,10 +84,10 @@ export const buscarCedula = async (req, res) => {
     const cedulaBuscar = req.query.cedula; // Asumiendo que la cédula se pasa como parámetro de consulta
   
     try {
-      const elector = await Electores.findOne({ cedula: cedulaBuscar });
+      const electores = await Electores.findOne({ cedula: cedulaBuscar });
   
-      if (elector) {
-        res.json(elector);
+      if (electores) {
+        res.json(electores);
       } else {
         res.json({ msg: 'Cedula no existe en la base de datos' });
       }
@@ -100,7 +100,7 @@ export const buscarCedula = async (req, res) => {
 export const filtro = async (req, res) => {
     
   const { grupo, lugar, mesa } = req.query;
-    
+    console.log(req.query)
   try {
     
     let query = {};
@@ -117,7 +117,7 @@ export const filtro = async (req, res) => {
       query.mesa = mesa;
     }
     const electores = await Electores.find(query);
-    res.json(electores);
+    res.json({electores});
 
   } catch (error) {
     res.status(500).json({ error: 'Error en el servidor' });
