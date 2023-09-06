@@ -63,20 +63,40 @@ export const removeElector = async (req, res) => {
 export const editarElector = async (req, res) => {
     const id = req.query.id; 
     const datosactualizar = req.body;
-   
+   console.log(datosactualizar)
     try {
     const elector = await Electores.updateOne({ _id: id },{ $set: datosactualizar });
     
         if (elector.matchedCount===1) {
           res.json({ msg: 'Actualizacion exitosa' });
         } else {
-          res.json({ msg: 'Cedula no existe en la base de datos' });
+          res.json({ msg: 'Error al actualizar, revisa los datos,' });
         }
       } catch (error) {
         res.status(500).json({ message: 'Error en el servidor' });
       }
     
      
+}
+//actualizar grupo
+
+export const editarGrupo = async (req, res) => {
+  const id = req.query.id; 
+  const {grupo} = req.body;
+ console.log(grupo)
+  try {
+  const elector = await Electores.updateOne({ _id: id },{ grupo: grupo});
+  
+      if (elector.matchedCount===1) {
+        res.json({ msg: 'Actualizacion exitosa' });
+      } else {
+        res.json({ msg: 'Error al actualizar, revisa los datos,' });
+      }
+    } catch (error) {
+      res.status(500).json({ message: 'Error en el servidor' });
+    }
+  
+   
 }
 
 //buscar por cedula
@@ -85,9 +105,9 @@ export const buscarCedula = async (req, res) => {
   
     try {
       const electores = await Electores.findOne({ cedula: cedulaBuscar });
-  
+       
       if (electores) {
-        res.json(electores);
+        res.json({electores});
       } else {
         res.json({ msg: 'Cedula no existe en la base de datos' });
       }
