@@ -2,10 +2,23 @@ import { Electores } from "../models/Electores.js";
 
 // consulta de datos GET
 export const getElectores = async  (req, res) => {
-
+  //const page = parseInt(req.query.page) || 1;
+  //const limit = parseInt(req.query.limit) || 25;
     try {
        const electores =  await Electores.find();
-         return res.json({electores});
+      //const totalItems = await Electores.countDocuments(); // Total de elementos en la base de datos
+      //const totalPages = Math.ceil(totalItems / limit);
+
+       // Calcular el índice de inicio y fin para la paginación
+   // const startIndex = (page-1) * limit;
+    //const endIndex = page * limit;
+  
+    // Consulta los datos paginados
+    //const electores = await Electores.find().skip(startIndex).limit(endIndex);
+
+         return res.json({ electores });
+         
+      
     } catch (error) {
         console.log(error);
         return res.status(500).json({error: 'error de servidor'});

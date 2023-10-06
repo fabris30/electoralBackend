@@ -29,7 +29,7 @@ export const createConteo = async  (req, res) => {
     }
    
 };
-//eliminar registro de votos
+//eliminar registro de votos 
 
 export const removeConteo = async (req, res) => {
     const id = req.query.id;
